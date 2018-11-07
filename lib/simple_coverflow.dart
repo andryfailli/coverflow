@@ -48,9 +48,12 @@ class CoverFlow extends StatefulWidget {
   /// Called when current item is changed.
   final OnCurrentItemChangedCallback currentItemChangedCallback;
 
+  // PageController
+  final PageController controller;
+
   const CoverFlow({@required this.itemBuilder, this.dismissibleItems: true,
     this.dismissedCallback, this.viewportFraction: .85, this.height: 525,
-    this.width: 700, this.itemCount: null, this.startIndex: null, this.currentItemChangedCallback: null})
+    this.width: 700, this.itemCount: null, this.startIndex: null, this.currentItemChangedCallback: null, this.controller: null})
       : assert(itemBuilder != null);
 
   @override
@@ -66,7 +69,7 @@ class _CoverFlowState extends State<CoverFlow> {
   initState() {
     super.initState();
     currentPage = widget.startIndex ?? 0;
-    controller = new PageController(
+    controller = this.widget.controller ?? new PageController(
       viewportFraction: widget.viewportFraction,
       initialPage: currentPage,
     );
